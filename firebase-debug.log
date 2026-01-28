@@ -1,0 +1,133 @@
+[debug] [2026-01-24T14:55:58.405Z] ----------------------------------------------------------------------
+[debug] [2026-01-24T14:55:58.409Z] Command:       /usr/bin/node /usr/bin/firebase deploy
+[debug] [2026-01-24T14:55:58.410Z] CLI Version:   15.3.1
+[debug] [2026-01-24T14:55:58.410Z] Platform:      linux
+[debug] [2026-01-24T14:55:58.410Z] Node Version:  v25.2.1
+[debug] [2026-01-24T14:55:58.410Z] Time:          Sat Jan 24 2026 20:25:58 GMT+0530 (India Standard Time)
+[debug] [2026-01-24T14:55:58.411Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-01-24T14:55:59.613Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-01-24T14:55:59.613Z] > authorizing via signed-in user (purushothamank.s799@gmail.com)
+[debug] [2026-01-24T14:55:59.613Z] [iam] checking project portfoli-yo for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-01-24T14:55:59.615Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:55:59.615Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:55:59.616Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoli-yo:testIamPermissions [none]
+[debug] [2026-01-24T14:55:59.616Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoli-yo:testIamPermissions x-goog-quota-user=projects/portfoli-yo
+[debug] [2026-01-24T14:55:59.616Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoli-yo:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-01-24T14:56:39.916Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoli-yo:testIamPermissions 200
+[debug] [2026-01-24T14:56:39.916Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoli-yo:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-01-24T14:56:39.918Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:56:39.918Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:56:39.918Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/portfoli-yo [none]
+[debug] [2026-01-24T14:56:55.635Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects/portfoli-yo, {"headers":{},"method":"GET","signal":{"reason":""}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects/portfoli-yo failed, reason: socket hang up
+[debug] [2026-01-24T14:56:55.635Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/portfoli-yo (original: request to https://firebase.googleapis.com/v1beta1/projects/portfoli-yo failed, reason: socket hang up)
+[debug] [2026-01-24T14:57:00.644Z] Error: Timed out.
+    at Timeout._onTimeout (/usr/lib/node_modules/firebase-tools/lib/utils.js:308:49)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-01-24T14:57:04.533Z] ----------------------------------------------------------------------
+[debug] [2026-01-24T14:57:04.537Z] Command:       /usr/bin/node /usr/bin/firebase deploy
+[debug] [2026-01-24T14:57:04.538Z] CLI Version:   15.3.1
+[debug] [2026-01-24T14:57:04.538Z] Platform:      linux
+[debug] [2026-01-24T14:57:04.538Z] Node Version:  v25.2.1
+[debug] [2026-01-24T14:57:04.538Z] Time:          Sat Jan 24 2026 20:27:04 GMT+0530 (India Standard Time)
+[debug] [2026-01-24T14:57:04.539Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-01-24T14:57:05.702Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-01-24T14:57:05.703Z] > authorizing via signed-in user (purushothamank.s799@gmail.com)
+[debug] [2026-01-24T14:57:05.704Z] [iam] checking project portfoli-yo for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-01-24T14:57:05.706Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:57:05.706Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:57:05.708Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoli-yo:testIamPermissions [none]
+[debug] [2026-01-24T14:57:05.708Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoli-yo:testIamPermissions x-goog-quota-user=projects/portfoli-yo
+[debug] [2026-01-24T14:57:05.708Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoli-yo:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-01-24T14:57:13.879Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoli-yo:testIamPermissions 200
+[debug] [2026-01-24T14:57:13.879Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoli-yo:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-01-24T14:57:13.880Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:57:13.881Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:57:13.881Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/portfoli-yo [none]
+[debug] [2026-01-24T14:57:17.961Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/portfoli-yo 200
+[debug] [2026-01-24T14:57:17.962Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/portfoli-yo {"projectId":"portfoli-yo","projectNumber":"849996313402","displayName":"Portfolio","name":"projects/portfoli-yo","resources":{"hostingSite":"portfoli-yo"},"state":"ACTIVE","etag":"1_44f00c34-6e40-423e-9a75-04cbf7fc0273"}
+[info] 
+[info] === Deploying to 'portfoli-yo'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2026-01-24T14:57:17.973Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:57:17.973Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:57:17.974Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoli-yo/versions [none]
+[debug] [2026-01-24T14:57:17.974Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoli-yo/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2026-01-24T14:57:33.220Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoli-yo/versions 200
+[debug] [2026-01-24T14:57:33.221Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoli-yo/versions {"name":"projects/849996313402/sites/portfoli-yo/versions/c3d2e4b83b5451b5","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[portfoli-yo]: beginning deploy... 
+[info] i  hosting[portfoli-yo]: found 2 files in public 
+[debug] [2026-01-24T14:59:33.673Z] [hosting] uploading with 200 concurrency
+[debug] [2026-01-24T14:59:33.694Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:59:33.694Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:59:33.695Z] [hosting] hash cache [cHVibGlj] stored for 2 files
+[debug] [2026-01-24T14:59:33.696Z] [hosting][hash queue][FINAL] {"max":14,"min":4,"avg":9,"active":0,"complete":2,"success":2,"errored":0,"retried":0,"total":2,"elapsed":18}
+[debug] [2026-01-24T14:59:33.696Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/849996313402/sites/portfoli-yo/versions/c3d2e4b83b5451b5:populateFiles [none]
+[debug] [2026-01-24T14:59:33.696Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/849996313402/sites/portfoli-yo/versions/c3d2e4b83b5451b5:populateFiles {"files":{"/resume.pdf":"5a7570afc722b8aed7a3c59cffab2481b088c8b5bf63cddfac50dfd4de8b724b","/index.html":"19b996fec351714e89bb5e1983964df3a900c8187535372c1d61a2179ef5e8e2"}}
+[debug] [2026-01-24T14:59:36.008Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/849996313402/sites/portfoli-yo/versions/c3d2e4b83b5451b5:populateFiles 200
+[debug] [2026-01-24T14:59:36.008Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/849996313402/sites/portfoli-yo/versions/c3d2e4b83b5451b5:populateFiles {"uploadRequiredHashes":["19b996fec351714e89bb5e1983964df3a900c8187535372c1d61a2179ef5e8e2"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/portfoli-yo/versions/c3d2e4b83b5451b5/files"}
+[debug] [2026-01-24T14:59:36.009Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:59:36.009Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:59:36.010Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfoli-yo/versions/c3d2e4b83b5451b5/files/19b996fec351714e89bb5e1983964df3a900c8187535372c1d61a2179ef5e8e2 [none]
+[debug] [2026-01-24T14:59:36.010Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfoli-yo/versions/c3d2e4b83b5451b5/files/19b996fec351714e89bb5e1983964df3a900c8187535372c1d61a2179ef5e8e2 [stream]
+[debug] [2026-01-24T14:59:36.012Z] [hosting][populate queue][FINAL] {"max":2315,"min":2315,"avg":2315,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":2318}
+[debug] [2026-01-24T14:59:36.013Z] [hosting] uploads queued: 1
+[debug] [2026-01-24T14:59:43.380Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfoli-yo/versions/c3d2e4b83b5451b5/files/19b996fec351714e89bb5e1983964df3a900c8187535372c1d61a2179ef5e8e2 200
+[debug] [2026-01-24T14:59:43.380Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/portfoli-yo/versions/c3d2e4b83b5451b5/files/19b996fec351714e89bb5e1983964df3a900c8187535372c1d61a2179ef5e8e2 [stream]
+[debug] [2026-01-24T14:59:43.381Z] [hosting][upload queue][FINAL] {"max":7373,"min":7373,"avg":7373,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":7373}
+[info] ✔  hosting[portfoli-yo]: file upload complete 
+[debug] [2026-01-24T14:59:43.383Z] [hosting] deploy completed after 9730ms
+[debug] [2026-01-24T14:59:43.383Z] [
+  {
+    "config": {
+      "public": "public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "portfoli-yo"
+    },
+    "version": "projects/849996313402/sites/portfoli-yo/versions/c3d2e4b83b5451b5"
+  }
+]
+[info] i  hosting[portfoli-yo]: finalizing version... 
+[debug] [2026-01-24T14:59:43.387Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:59:43.388Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:59:43.388Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoli-yo/versions/c3d2e4b83b5451b5 updateMask=status%2Cconfig
+[debug] [2026-01-24T14:59:43.389Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoli-yo/versions/c3d2e4b83b5451b5 {"status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]}}
+[debug] [2026-01-24T14:59:47.683Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoli-yo/versions/c3d2e4b83b5451b5 200
+[debug] [2026-01-24T14:59:47.683Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoli-yo/versions/c3d2e4b83b5451b5 {"name":"projects/849996313402/sites/portfoli-yo/versions/c3d2e4b83b5451b5","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2026-01-24T14:57:32.689514Z","createUser":{"email":"purushothamank.s799@gmail.com"},"finalizeTime":"2026-01-24T14:59:47.447155Z","finalizeUser":{"email":"purushothamank.s799@gmail.com"}}
+[debug] [2026-01-24T14:59:47.683Z] [hosting] finalized version for portfoli-yo:[object Object]
+[info] ✔  hosting[portfoli-yo]: version finalized 
+[info] i  hosting[portfoli-yo]: releasing new version... 
+[debug] [2026-01-24T14:59:47.684Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:59:47.685Z] Checked if tokens are valid: true, expires at: 1769268888750
+[debug] [2026-01-24T14:59:47.685Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoli-yo/channels/live/releases versionName=projects%2F849996313402%2Fsites%2Fportfoli-yo%2Fversions%2Fc3d2e4b83b5451b5
+[debug] [2026-01-24T14:59:47.685Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoli-yo/channels/live/releases {}
+[debug] [2026-01-24T14:59:48.297Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoli-yo/channels/live/releases 200
+[debug] [2026-01-24T14:59:48.298Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/portfoli-yo/channels/live/releases {"name":"projects/849996313402/sites/portfoli-yo/channels/live/releases/1769266787462000","version":{"name":"projects/849996313402/sites/portfoli-yo/versions/c3d2e4b83b5451b5","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2026-01-24T14:57:32.689514Z","createUser":{"email":"purushothamank.s799@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJhPqt4Q9J2tAh6vuZ640GoY00SpPdTdl6MKKV6iiYTi1x11VFi"},"finalizeTime":"2026-01-24T14:59:47.447155Z","finalizeUser":{"email":"purushothamank.s799@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJhPqt4Q9J2tAh6vuZ640GoY00SpPdTdl6MKKV6iiYTi1x11VFi"}},"type":"DEPLOY","releaseTime":"2026-01-24T14:59:47.462Z","releaseUser":{"email":"purushothamank.s799@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJhPqt4Q9J2tAh6vuZ640GoY00SpPdTdl6MKKV6iiYTi1x11VFi"}}
+[debug] [2026-01-24T14:59:48.298Z] [hosting] release: {"name":"projects/849996313402/sites/portfoli-yo/channels/live/releases/1769266787462000","version":{"name":"projects/849996313402/sites/portfoli-yo/versions/c3d2e4b83b5451b5","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2026-01-24T14:57:32.689514Z","createUser":{"email":"purushothamank.s799@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJhPqt4Q9J2tAh6vuZ640GoY00SpPdTdl6MKKV6iiYTi1x11VFi"},"finalizeTime":"2026-01-24T14:59:47.447155Z","finalizeUser":{"email":"purushothamank.s799@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJhPqt4Q9J2tAh6vuZ640GoY00SpPdTdl6MKKV6iiYTi1x11VFi"}},"type":"DEPLOY","releaseTime":"2026-01-24T14:59:47.462Z","releaseUser":{"email":"purushothamank.s799@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJhPqt4Q9J2tAh6vuZ640GoY00SpPdTdl6MKKV6iiYTi1x11VFi"}}
+[info] ✔  hosting[portfoli-yo]: release complete 
+[info] 
+[info] ✔  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/portfoli-yo/overview
+[info] Hosting URL: https://portfoli-yo.web.app
+[debug] [2026-01-24T14:59:54.350Z] Error: Timed out.
+    at Timeout.<anonymous> (/usr/lib/node_modules/firebase-tools/lib/utils.js:308:49)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+[error] 
+[error] Error: An unexpected error has occurred.

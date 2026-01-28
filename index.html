@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>K S Purushothaman | Portfolio</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* Brand Colors (Purple + Orange) */
+    :root {
+      --brand-primary: #7c3aed; /* purple-600 */
+      --brand-secondary: #fb923c; /* orange-400 */
+    }
+
+    /* Base styles */
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 60%);
+      color: #f9fafb;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #020617;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #4c1d95;
+      border-radius: 999px;
+    }
+
+    /* Particle background canvas */
+    #particles-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+    }
+
+    /* Parallax background on hero */
+    .hero-parallax {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0% 0%, rgba(124, 58, 237, 0.5), transparent 55%),
+                  radial-gradient(circle at 100% 0%, rgba(251, 146, 60, 0.45), transparent 55%),
+                  radial-gradient(circle at 50% 100%, rgba(244, 114, 182, 0.45), transparent 60%);
+      opacity: 0.65;
+      transform: translateY(0);
+      will-change: transform;
+      z-index: -1;
+    }
+
+    /* Floating custom cursor */
+    #cursor {
+      pointer-events: none;
+      position: fixed;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #fff, rgba(124, 58, 237, 0.3));
+      mix-blend-mode: difference;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s ease-out, width 0.2s, height 0.2s, opacity 0.2s;
+      opacity: 0.9;
+    }
+
+    /* Cursor grow on hover of interactive elements */
+    a:hover ~ #cursor,
+    button:hover ~ #cursor {
+      width: 32px;
+      height: 32px;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Simple fade-in keyframe (for hero intro) */
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fade-in-up 0.9s ease-out forwards;
+    }
+
+    /* Glassy card */
+    .glass-card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      backdrop-filter: blur(18px);
+    }
+
+    /* Timeline vertical line */
+    .timeline-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      transform: translateX(-50%);
+      background: linear-gradient(
+        to bottom,
+        rgba(124, 58, 237, 0),
+        rgba(124, 58, 237, 0.9),
+        rgba(251, 146, 60, 0)
+      );
+      opacity: 0.8;
+    }
+
+    /* Mobile nav open class helper */
+    .mobile-menu-open {
+      overflow: hidden;
+    }
+
+    /* Dialog styling on unsupported browsers fallback */
+    dialog::backdrop {
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    @media (max-width: 768px) {
+      #cursor {
+        display: none; /* cursor effect off on small screens */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background Canvas for Particles -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
+
+  <!-- NAVBAR -->
+  <header
+    class="fixed top-0 left-0 w-full z-40 bg-slate-950/60 backdrop-blur-xl border-b border-slate-800"
+  >
+    <div
+      class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3"
+    >
+      <div class="flex items-center gap-2">
+        <div
+          class="w-8 h-8 rounded-xl bg-gradient-to-tr from-purple-500 to-orange-400 flex items-center justify-center text-xs font-bold"
+        >
+          KSP
+        </div>
+        <div class="flex flex-col leading-tight">
+          <span class="font-semibold text-sm md:text-base">
+            K S Purushothaman
+          </span>
+          <span class="text-[11px] text-slate-400 md:text-xs">
+            CSE Student • Developer
+          </span>
+        </div>
+      </div>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#home" class="hover:text-purple-300 transition">Home</a>
+        <a href="#about" class="hover:text-purple-300 transition">About</a>
+        <a href="#timeline" class="hover:text-purple-300 transition">Timeline</a>
+        <a href="#skills" class="hover:text-purple-300 transition">Skills</a>
+        <a href="#certifications" class="hover:text-purple-300 transition"
+          >Certifications</a
+        >
+        <a href="#achievements" class="hover:text-purple-300 transition"
+          >Achievements</a
+        >
+        <a href="#projects" class="hover:text-purple-300 transition">Projects</a>
+        <a href="#contact" class="hover:text-purple-300 transition">Contact</a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobileMenuBtn"
+        class="md:hidden inline-flex items-center justify-center p-2 rounded-lg border border-slate-700 text-slate-200"
+      >
+        <i class="fas fa-bars text-lg"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div
+      id="mobileMenu"
+      class="md:hidden max-h-0 overflow-hidden transition-all duration-300 bg-slate-950/95 border-t border-slate-800"
+    >
+      <nav class="px-4 py-4 flex flex-col gap-3 text-sm">
+        <a href="#home" class="hover:text-purple-300" data-close-mobile>Home</a>
+        <a href="#about" class="hover:text-purple-300" data-close-mobile
+          >About</a
+        >
+        <a href="#timeline" class="hover:text-purple-300" data-close-mobile
+          >Timeline</a
+        >
+        <a href="#skills" class="hover:text-purple-300" data-close-mobile
+          >Skills</a
+        >
+        <a
+          href="#certifications"
+          class="hover:text-purple-300"
+          data-close-mobile
+          >Certifications</a
+        >
+        <a
+          href="#achievements"
+          class="hover:text-purple-300"
+          data-close-mobile
+          >Achievements</a
+        >
+        <a href="#projects" class="hover:text-purple-300" data-close-mobile
+          >Projects</a
+        >
+        <a href="#contact" class="hover:text-purple-300" data-close-mobile
+          >Contact</a
+        >
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="pt-20">
+    <!-- HERO -->
+    <section
+      id="home"
+      class="relative min-h-[90vh] flex items-center justify-center px-4"
+    >
+      <div class="hero-parallax" id="heroParallax"></div>
+
+      <div
+        class="max-w-4xl mx-auto text-center space-y-6 fade-in-up mt-10 md:mt-0"
+      >
+        <p
+          class="inline-flex items-center gap-2 text-xs md:text-sm px-3 py-1 rounded-full bg-slate-900/70 border border-slate-700 text-slate-300"
+        >
+          <span
+            class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+          ></span>
+          Open to Internships & Projects
+        </p>
+        <h1
+          class="text-4xl md:text-6xl font-extrabold leading-tight bg-gradient-to-r from-purple-400 via-orange-300 to-pink-400 bg-clip-text text-transparent"
+        >
+          Building Experiences with Code,
+          <br class="hidden md:block" />
+          Creativity & Curiosity.
+        </h1>
+        <p class="text-base md:text-lg text-slate-300 max-w-2xl mx-auto">
+          I'm a Computer Science student who loves turning ideas into
+          interactive, beautiful, and meaningful digital experiences using
+          modern web technologies and AI.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 pt-2">
+          <button
+            class="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-orange-500 text-sm md:text-base font-semibold shadow-lg shadow-purple-500/30 hover:scale-[1.02] active:scale-95 transition"
+            onclick="openResume()"
+          >
+            <i class="fas fa-file-alt mr-2"></i> View Resume
+          </button>
+          <a
+            href="#projects"
+            class="px-6 py-3 rounded-xl border border-slate-600 text-sm md:text-base font-semibold hover:bg-slate-800/80 hover:border-purple-500/80 transition"
+          >
+            <i class="fas fa-code mr-2"></i> View Projects
+          </a>
+        </div>
+        <div class="flex justify-center gap-5 pt-4 text-lg text-slate-300">
+          <a
+            href="https://github.com/Purushothamanks"
+            target="_blank"
+            class="hover:text-purple-300 transition"
+          >
+            <i class="fab fa-github"></i>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/purushothaman-k-s-158900282"
+            target="_blank"
+            class="hover:text-purple-300 transition"
+          >
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a
+            href="mailto:purushothamank.s799@gmail.com"
+            class="hover:text-orange-300 transition"
+          >
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-16 md:py-24 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-2 text-center bg-gradient-to-r from-purple-300 to-orange-300 bg-clip-text text-transparent"
+        >
+          About Me
+        </h2>
+        <p class="text-center text-slate-400 mb-10 text-sm md:text-base">
+          A quick glimpse into who I am and what drives me.
+        </p>
+
+        <div
+          class="grid md:grid-cols-2 gap-8 items-stretch reveal"
+        >
+          <div class="glass-card rounded-2xl p-6 md:p-8 flex flex-col gap-4">
+            <h3 class="text-xl font-semibold mb-2 flex items-center gap-2">
+              <span
+                class="w-8 h-8 rounded-xl bg-purple-600/20 flex items-center justify-center text-purple-300"
+              >
+                <i class="fas fa-graduation-cap"></i>
+              </span>
+              Academic Journey
+            </h3>
+            <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+              🎓 I'm pursuing
+              <span class="font-semibold text-purple-300"
+                >B.E. Computer Science and Engineering</span
+              >
+              at <span class="font-semibold">R P Sarathy Institute of Technology</span>.
+              I'm deeply interested in building scalable web applications and exploring
+              AI-powered tools that solve real-world problems.
+            </p>
+            <p class="text-sm md:text-base text-slate-300">
+              I enjoy learning by doing—whether it's personal projects, college
+              mini-projects, or experimenting with new frameworks and APIs.
+            </p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6 md:p-8 flex flex-col gap-4">
+            <h3 class="text-xl font-semibold mb-2 flex items-center gap-2">
+              <span
+                class="w-8 h-8 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-300"
+              >
+                <i class="fas fa-bolt"></i>
+              </span>
+              Beyond the Code
+            </h3>
+            <p class="text-sm md:text-base text-slate-300">
+              💡 I love experimenting with <span class="font-semibold">AI tools</span>,
+              optimizing workflows, and building fun side projects like AI-generated
+              YouTube shorts.
+            </p>
+            <p class="text-sm md:text-base text-slate-300">
+              🚀 I'm motivated by curiosity, continuous improvement, and collaborating
+              with people who are passionate about tech, startups, and innovation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section id="timeline" class="py-16 md:py-24 px-4">
+      <div class="max-w-5xl mx-auto relative">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-2 text-center bg-gradient-to-r from-purple-300 to-orange-300 bg-clip-text text-transparent"
+        >
+          Timeline
+        </h2>
+        <p class="text-center text-slate-400 mb-10 text-sm md:text-base">
+          A snapshot of my growth and milestones so far.
+        </p>
+
+        <!-- Timeline line -->
+        <div class="timeline-line hidden md:block"></div>
+
+        <div class="space-y-8 md:space-y-10 reveal">
+          <!-- Item -->
+          <div class="relative md:grid md:grid-cols-2 md:gap-6 items-center">
+            <div class="hidden md:block text-right pr-8">
+              <p class="text-xs uppercase tracking-wide text-slate-400">
+                2023 - Present
+              </p>
+              <p class="font-semibold text-sm text-slate-100">
+                B.E. CSE @ R P Sarathy Institute of Technology
+              </p>
+            </div>
+            <div class="md:hidden mb-1">
+              <p class="text-xs uppercase tracking-wide text-slate-400">
+                2023 - Present
+              </p>
+            </div>
+            <div
+              class="hidden md:flex justify-center items-center"
+            >
+              <div
+                class="w-4 h-4 rounded-full bg-purple-500 border-4 border-slate-900"
+              ></div>
+            </div>
+            <div class="glass-card rounded-2xl p-5 md:p-6">
+              <p class="md:hidden font-semibold text-sm mb-1">
+                B.E. CSE @ R P Sarathy Institute of Technology
+              </p>
+              <p class="text-sm text-slate-300">
+                Started my engineering journey, exploring programming fundamentals,
+                data structures, algorithms, and foundational computer science concepts.
+                This is where I began taking tech seriously.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item -->
+          <div class="relative md:grid md:grid-cols-2 md:gap-6 items-center">
+            <div class="md:hidden mb-1">
+              <p class="text-xs uppercase tracking-wide text-slate-400">
+                2024
+              </p>
+            </div>
+            <div class="hidden md:block text-right pr-8">
+              <p class="text-xs uppercase tracking-wide text-slate-400">
+                2024
+              </p>
+              <p class="font-semibold text-sm text-slate-100">
+                Built AI & Web Projects
+              </p>
+            </div>
+            <div class="hidden md:flex justify-center items-center">
+              <div
+                class="w-4 h-4 rounded-full bg-orange-400 border-4 border-slate-900"
+              ></div>
+            </div>
+            <div class="glass-card rounded-2xl p-5 md:p-6">
+              <p class="md:hidden font-semibold text-sm mb-1">
+                Built AI & Web Projects
+              </p>
+              <p class="text-sm text-slate-300">
+                Experimented with AI-based content generation, portfolio designs,
+                and backend features. Improved my skills in JavaScript, React, Node,
+                and deployment basics.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item -->
+          <div class="relative md:grid md:grid-cols-2 md:gap-6 items-center">
+            <div class="md:hidden mb-1">
+              <p class="text-xs uppercase tracking-wide text-slate-400">
+                Future
+              </p>
+            </div>
+            <div class="hidden md:block text-right pr-8">
+              <p class="text-xs uppercase tracking-wide text-slate-400">
+                Future
+              </p>
+              <p class="font-semibold text-sm text-slate-100">
+                Internship, Open Source & Startup Journey
+              </p>
+            </div>
+            <div class="hidden md:flex justify-center items-center">
+              <div
+                class="w-4 h-4 rounded-full bg-pink-400 border-4 border-slate-900"
+              ></div>
+            </div>
+            <div class="glass-card rounded-2xl p-5 md:p-6">
+              <p class="md:hidden font-semibold text-sm mb-1">
+                Internship, Open Source & Startup Journey
+              </p>
+              <p class="text-sm text-slate-300">
+                I'm actively looking forward to internships, real-world projects,
+                contributing to open source, and one day building or joining a
+                high-impact startup.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="py-16 md:py-24 px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-2 text-center bg-gradient-to-r from-purple-300 to-orange-300 bg-clip-text text-transparent"
+        >
+          Skills
+        </h2>
+        <p class="text-center text-slate-400 mb-10 text-sm md:text-base">
+          Tools and technologies I use to bring ideas to life.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-6 reveal">
+          <!-- Programming -->
+          <div class="glass-card rounded-2xl p-6 space-y-3">
+            <h3 class="font-semibold text-lg flex items-center gap-2">
+              <span
+                class="w-8 h-8 rounded-xl bg-purple-600/20 flex items-center justify-center text-purple-300"
+              >
+                <i class="fas fa-code"></i>
+              </span>
+              Programming
+            </h3>
+            <ul class="text-sm text-slate-300 space-y-1">
+              <li>Python</li>
+              <li>JavaScript (ES6+)</li>
+              <li>Java</li>
+              <li>C++ (Basics)</li>
+            </ul>
+          </div>
+
+          <!-- Web Dev -->
+          <div class="glass-card rounded-2xl p-6 space-y-3">
+            <h3 class="font-semibold text-lg flex items-center gap-2">
+              <span
+                class="w-8 h-8 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-300"
+              >
+                <i class="fas fa-globe"></i>
+              </span>
+              Web Development
+            </h3>
+            <ul class="text-sm text-slate-300 space-y-1">
+              <li>HTML, CSS, Tailwind</li>
+              <li>React (Basics)</li>
+              <li>Node.js & Express (Basics)</li>
+              <li>REST APIs</li>
+            </ul>
+          </div>
+
+          <!-- Tools -->
+          <div class="glass-card rounded-2xl p-6 space-y-3">
+            <h3 class="font-semibold text-lg flex items-center gap-2">
+              <span
+                class="w-8 h-8 rounded-xl bg-pink-500/20 flex items-center justify-center text-pink-300"
+              >
+                <i class="fas fa-toolbox"></i>
+              </span>
+              Tools & Platforms
+            </h3>
+            <ul class="text-sm text-slate-300 space-y-1">
+              <li>Git & GitHub</li>
+              <li>Linux</li>
+              <li>MySQL</li>
+              <li>VS Code, Postman</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications" class="py-16 md:py-24 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-2 text-center bg-gradient-to-r from-purple-300 to-orange-300 bg-clip-text text-transparent"
+        >
+          Certifications
+        </h2>
+        <p class="text-center text-slate-400 mb-10 text-sm md:text-base">
+          Some of the certifications that reflect my learning.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6 reveal">
+          <div class="glass-card rounded-2xl p-5 flex items-start gap-3">
+            <div
+              class="w-9 h-9 rounded-xl bg-purple-600/20 flex items-center justify-center text-purple-300 mt-1"
+            >
+              <i class="fas fa-certificate"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-sm md:text-base">
+                Python Programming (Coursera / Similar)
+              </h3>
+              <p class="text-xs md:text-sm text-slate-400">
+                Strengthened fundamentals in Python, functions, data structures,
+                and problem solving.
+              </p>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-5 flex items-start gap-3">
+            <div
+              class="w-9 h-9 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-300 mt-1"
+            >
+              <i class="fas fa-certificate"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-sm md:text-base">
+                Web Development Basics
+              </h3>
+              <p class="text-xs md:text-sm text-slate-400">
+                Learned how the web works, HTML/CSS fundamentals, responsive
+                design, and basic JavaScript.
+              </p>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-5 flex items-start gap-3">
+            <div
+              class="w-9 h-9 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-300 mt-1"
+            >
+              <i class="fas fa-certificate"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-sm md:text-base">
+                Data Structures / Algorithms Workshop
+              </h3>
+              <p class="text-xs md:text-sm text-slate-400">
+                Participated in sessions focused on algorithmic thinking and
+                efficient problem solving.
+              </p>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-5 flex items-start gap-3">
+            <div
+              class="w-9 h-9 rounded-xl bg-pink-500/20 flex items-center justify-center text-pink-300 mt-1"
+            >
+              <i class="fas fa-certificate"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-sm md:text-base">
+                Cloud / AI Related Learning
+              </h3>
+              <p class="text-xs md:text-sm text-slate-400">
+                Hands-on exposure to cloud services or AI tools via online
+                platforms and labs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="py-16 md:py-24 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-2 text-center bg-gradient-to-r from-purple-300 to-orange-300 bg-clip-text text-transparent"
+        >
+          Achievements
+        </h2>
+        <p class="text-center text-slate-400 mb-10 text-sm md:text-base">
+          Small wins that keep me motivated.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-6 reveal">
+          <div
+            class="glass-card rounded-2xl p-5 flex flex-col items-center text-center gap-2"
+          >
+            <div
+              class="w-10 h-10 rounded-2xl bg-purple-600/30 flex items-center justify-center text-purple-200"
+            >
+              <i class="fas fa-trophy"></i>
+            </div>
+            <p class="font-semibold text-sm md:text-base">
+              Built & Deployed Personal Projects
+            </p>
+            <p class="text-xs md:text-sm text-slate-400">
+              Completed multiple personal / academic projects that improved my
+              practical skills.
+            </p>
+          </div>
+
+          <div
+            class="glass-card rounded-2xl p-5 flex flex-col items-center text-center gap-2"
+          >
+            <div
+              class="w-10 h-10 rounded-2xl bg-orange-500/30 flex items-center justify-center text-orange-100"
+            >
+              <i class="fas fa-users"></i>
+            </div>
+            <p class="font-semibold text-sm md:text-base">
+              Team Collaboration
+            </p>
+            <p class="text-xs md:text-sm text-slate-400">
+              Worked with peers on mini projects, learning how to communicate
+              ideas and solve problems together.
+            </p>
+          </div>
+
+          <div
+            class="glass-card rounded-2xl p-5 flex flex-col items-center text-center gap-2"
+          >
+            <div
+              class="w-10 h-10 rounded-2xl bg-emerald-500/30 flex items-center justify-center text-emerald-100"
+            >
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <p class="font-semibold text-sm md:text-base">
+              Continuous Learning
+            </p>
+            <p class="text-xs md:text-sm text-slate-400">
+              Regularly improving through online courses, documentation, and
+              hands-on practice.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="py-16 md:py-24 px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-2 text-center bg-gradient-to-r from-purple-300 to-orange-300 bg-clip-text text-transparent"
+        >
+          Projects
+        </h2>
+        <p class="text-center text-slate-400 mb-10 text-sm md:text-base">
+          A selection of things I've been working on.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6 reveal">
+          <article class="glass-card rounded-2xl p-6 flex flex-col gap-3">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="font-semibold text-lg">
+                Team Task Tracking - Managemet 
+              </h3>
+              <span
+                class="text-[11px] px-2 py-1 rounded-full bg-purple-600/30 text-purple-100 border border-purple-500/60"
+              >
+                Tracker • Automation
+              </span>
+            </div>
+            <p class="text-sm text-slate-300">
+              A pipeline where the leade / members can do their task 
+              and monitor the task level. Automatic tracking system ,
+              manages the time of monitoeing. To visit our web
+              (https://task-teamtracker.web.app)
+          
+            </p>
+            <p class="text-xs text-slate-400">
+              Tech: Html , Css , js , Mango DB , React
+            </p>
+          </article>
+
+          <article class="glass-card rounded-2xl p-6 flex flex-col gap-3">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="font-semibold text-lg">
+                Department Portal 
+              </h3>
+              <span
+                class="text-[11px] px-2 py-1 rounded-full bg-orange-500/25 text-orange-100 border border-orange-400/50"
+              >
+                Web • UI
+              </span>
+            </div>
+            <p class="text-sm text-slate-300">
+              This page is used for Education purpose , can manage 
+              the students details also Staff's members and 
+              management events. To visit our web
+              (https://department-rpsit.web.app)
+            <p class="text-xs text-slate-400">
+              Tech: HTML, Tailwind CSS, Vanilla JavaScript
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-16 md:py-24 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-2 text-center bg-gradient-to-r from-purple-300 to-orange-300 bg-clip-text text-transparent"
+        >
+          Let's Connect
+        </h2>
+        <p class="text-center text-slate-400 mb-10 text-sm md:text-base">
+          Have an opportunity, idea, or project in mind? I'd love to talk.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8 reveal">
+          <!-- Contact Info -->
+          <div class="space-y-4">
+            <div class="glass-card rounded-2xl p-5 flex gap-4 items-center">
+              <div
+                class="w-10 h-10 rounded-2xl bg-purple-600/25 flex items-center justify-center text-purple-200"
+              >
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="text-sm">
+                <p class="font-semibold text-slate-100">Email</p>
+                <a
+                  href="mailto:purushothamank.s799@gmail.com"
+                  class="text-slate-300 hover:text-purple-300 break-all"
+                >
+                  purushothamank.s799@gmail.com
+                </a>
+              </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-5 flex gap-4 items-center">
+              <div
+                class="w-10 h-10 rounded-2xl bg-orange-500/25 flex items-center justify-center text-orange-100"
+              >
+                <i class="fas fa-phone"></i>
+              </div>
+              <div class="text-sm">
+                <p class="font-semibold text-slate-100">Phone</p>
+                <p class="text-slate-300">+91 94871 20719</p>
+              </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-5 flex gap-4 items-center">
+              <div
+                class="w-10 h-10 rounded-2xl bg-emerald-500/25 flex items-center justify-center text-emerald-100"
+              >
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="text-sm">
+                <p class="font-semibold text-slate-100">Location</p>
+                <p class="text-slate-300">Thoppur, Salem, India</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form (front-end only) -->
+    <form 
+  action="https://getform.io/f/bolzvmga"
+  method="POST"
+  enctype="multipart/form-data"
+  class="max-w-xl mx-auto bg-slate-900/70 backdrop-blur-xl p-8 rounded-2xl border border-slate-700 shadow-xl space-y-6"
+>
+
+  <h2 class="text-3xl font-bold text-center bg-gradient-to-r from-purple-300 to-orange-300 bg-clip-text text-transparent">
+    💬 Let's Chat!
+  </h2>
+
+  <!-- NAME -->
+  <input 
+    type="text" 
+    name="name" 
+    required 
+    placeholder="Your Name"
+    class="w-full px-4 py-3 bg-slate-800/60 rounded-xl text-slate-100 border border-slate-600 focus:ring-2 focus:ring-purple-500"
+  />
+
+  <!-- EMAIL -->
+  <input 
+    type="email" 
+    name="email" 
+    required 
+    placeholder="Your Email"
+    class="w-full px-4 py-3 bg-slate-800/60 rounded-xl text-slate-100 border border-slate-600 focus:ring-2 focus:ring-purple-500"
+  />
+
+  <!-- MESSAGE -->
+  <textarea 
+    name="message" 
+    required 
+    placeholder="Your Message"
+    rows="4"
+    class="w-full px-4 py-3 bg-slate-800/60 rounded-xl text-slate-100 border border-slate-600 focus:ring-2 focus:ring-purple-500"
+  ></textarea>
+
+  <!-- SUBMIT BTN -->
+  <button 
+    type="submit"
+    class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-orange-500 text-white font-semibold hover:scale-[1.02] active:scale-95 transition-all duration-150 shadow-lg shadow-purple-500/30"
+  >
+    🚀 Send Message
+  </button>
+</form>
+
+
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Resume Modal (dialog) -->
+  <dialog
+    id="resumeModal"
+    class="p-0 bg-slate-950/90 rounded-xl w-11/12 md:w-3/4 h-3/4 border border-slate-700"
+  >
+    <div class="w-full h-full flex flex-col">
+      <div
+        class="flex items-center justify-between px-4 py-2 border-b border-slate-800 bg-slate-950/80"
+      >
+        <span class="text-xs md:text-sm text-slate-200"
+          >My Resume (PDF)</span
+        >
+        <button
+          class="text-slate-400 hover:text-slate-100 text-lg"
+          onclick="closeResume()"
+        >
+          &times;
+        </button>
+      </div>
+      <!-- NOTE: Place your resume file next to this HTML and name it 'resume.pdf' OR change the src path -->
+      <iframe
+        src="/home/purushothaman/Desktop/PORTFOLIO/Project_file/Resume 1.pdf"
+        class="w-full flex-1 bg-slate-900"
+        title="Resume PDF"
+      ></iframe>
+    </div>
+  </dialog>
+
+  <!-- Scroll-to-top button -->
+  <button
+    id="scrollTopBtn"
+    class="fixed bottom-5 right-5 w-10 h-10 rounded-full bg-slate-900/80 border border-slate-700 text-slate-200 flex items-center justify-center text-sm shadow-lg shadow-slate-900/40 hover:bg-slate-800 transition opacity-0 pointer-events-none"
+  >
+    ↑
+  </button>
+
+  <!-- SCRIPTS -->
+  <script>
+    /* ============================
+       PARTICLE BACKGROUND
+       ============================ */
+    const canvas = document.getElementById("particles-canvas");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const particles = [];
+    const PARTICLE_COUNT = 120;
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.4;
+        this.speedY = (Math.random() - 0.5) * 0.4;
+        this.alpha = Math.random() * 0.4 + 0.1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(226, 232, 240," + this.alpha + ")";
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles.length = 0;
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push(new Particle());
+      }
+    }
+    initParticles();
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p) => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    /* ============================
+       CUSTOM CURSOR
+       ============================ */
+    const cursor = document.getElementById("cursor");
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
+    });
+
+    /* ============================
+       PARALLAX HERO BACKGROUND
+       ============================ */
+    const heroParallax = document.getElementById("heroParallax");
+    window.addEventListener("scroll", () => {
+      const offset = window.scrollY;
+      if (heroParallax) {
+        heroParallax.style.transform = "translateY(" + offset * 0.2 + "px)";
+      }
+    });
+
+    /* ============================
+       MOBILE NAV MENU
+       ============================ */
+    const mobileBtn = document.getElementById("mobileMenuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    mobileBtn.addEventListener("click", () => {
+      const isOpen = mobileMenu.style.maxHeight && mobileMenu.style.maxHeight !== "0px";
+      if (isOpen) {
+        mobileMenu.style.maxHeight = "0px";
+        document.body.classList.remove("mobile-menu-open");
+      } else {
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
+        document.body.classList.add("mobile-menu-open");
+      }
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll("[data-close-mobile]").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.style.maxHeight = "0px";
+        document.body.classList.remove("mobile-menu-open");
+      });
+    });
+
+    /* ============================
+       RESUME MODAL
+       ============================ */
+    const resumeModal = document.getElementById("resumeModal");
+    function openResume() {
+      if (typeof resumeModal.showModal === "function") {
+        resumeModal.showModal();
+      } else {
+        // Fallback if dialog not supported
+        alert("Your browser does not fully support dialog. Please open the resume PDF manually.");
+      }
+    }
+    function closeResume() {
+      resumeModal.close();
+    }
+    window.openResume = openResume;
+    window.closeResume = closeResume;
+
+    /* ============================
+       CONTACT FORM (FRONT-END ONLY)
+       ============================ */
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const status = document.getElementById("contactStatus");
+      status.textContent = "Thank you! This form is a front-end demo only. You can email me directly.";
+      e.target.reset();
+    }
+    window.handleContactSubmit = handleContactSubmit;
+
+    /* ============================
+       SCROLL-TO-TOP BUTTON
+       ============================ */
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 400) {
+        scrollTopBtn.classList.remove("opacity-0", "pointer-events-none");
+      } else {
+        scrollTopBtn.classList.add("opacity-0", "pointer-events-none");
+      }
+    });
+    scrollTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    /* ============================
+       SCROLL REVEAL ANIMATION
+       ============================ */
+    const revealEls = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    revealEls.forEach((el) => revealObserver.observe(el));
+  </script>
+</body>
+</html>
