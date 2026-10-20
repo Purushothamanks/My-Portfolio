@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Antigravity Two-Way Voice Hotline</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📞</text></svg>">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background: #07090e;
+      color: #ffffff;
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2.5rem 1.5rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Ambient background glow */
+    .glow-circle {
+      position: absolute;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(0,0,0,0) 70%);
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+      50% { opacity: 0.9; transform: translateX(-50%) scale(1.15); }
+    }
+
+    /* Caller Info */
+    .caller-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      z-index: 10;
+      margin-top: 1.5rem;
+    }
+    .avatar-wrap {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin-bottom: 1.5rem;
+    }
+    .avatar-ring {
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 2px solid rgba(99, 102, 241, 0.4);
+      animation: ringRipple 2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+    }
+    @keyframes ringRipple {
+      0% { transform: scale(0.9); opacity: 1; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      box-shadow: 0 15px 35px rgba(79, 70, 229, 0.4);
+      border: 3px solid rgba(255, 255, 255, 0.15);
+    }
+    .caller-name {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+    .caller-status {
+      font-size: 0.95rem;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+    }
+
+    /* Transcript & Audio Wave Box */
+    .dialogue-box {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.25rem;
+      padding: 1.25rem;
+      backdrop-filter: blur(16px);
+      z-index: 10;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .bubble {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+    .bubble.bot {
+      color: #c7d2fe;
+    }
+    .bubble.user {
+      color: #10b981;
+      font-weight: 600;
+    }
+
+    /* Waveform visualizer bars */
+    .wave-bars {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 28px;
+      margin-top: 0.5rem;
+    }
+    .wave-bar {
+      width: 4px;
+      height: 6px;
+      background: #818cf8;
+      border-radius: 2px;
+      transition: height 0.1s ease;
+    }
+    .wave-bars.active .wave-bar {
+      animation: wavePulse 0.8s ease-in-out infinite alternate;
+    }
+    .wave-bars.active .wave-bar:nth-child(2) { animation-delay: 0.15s; }
+    .wave-bars.active .wave-bar:nth-child(3) { animation-delay: 0.3s; }
+    .wave-bars.active .wave-bar:nth-child(4) { animation-delay: 0.45s; }
+    .wave-bars.active .wave-bar:nth-child(5) { animation-delay: 0.2s; }
+    .wave-bars.active .wave-bar:nth-child(6) { animation-delay: 0.35s; }
+    @keyframes wavePulse {
+      0% { height: 6px; }
+      100% { height: 26px; }
+    }
+
+    /* Actions Bottom Sheet */
+    .actions-section {
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 10;
+      margin-bottom: 1rem;
+    }
+    .action-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.8rem;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+    .action-btn:active {
+      transform: scale(0.92);
+    }
+    .btn-decline {
+      background: #ef4444;
+      color: #ffffff;
+      box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4);
+    }
+    .btn-answer {
+      background: #10b981;
+      color: #ffffff;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+      animation: answerBounce 1.5s ease-in-out infinite;
+    }
+    @keyframes answerBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+    .action-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    /* Keyboard input fallback */
+    .text-fallback {
+      display: none;
+      width: 100%;
+      max-width: 440px;
+      margin-top: 1rem;
+      gap: 0.5rem;
+    }
+    .text-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+      padding: 0.75rem 1.25rem;
+      color: #ffffff;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .text-send-btn {
+      background: #6366f1;
+      color: #ffffff;
+      border: none;
+      border-radius: 9999px;
+      padding: 0 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-circle"></div>
+
+  <!-- Top Caller Card -->
+  <div class="caller-section">
+    <div class="avatar-wrap">
+      <div class="avatar-ring" id="avatar-ring"></div>
+      <div class="avatar">⚡</div>
+    </div>
+    <h1 class="caller-name">Antigravity AI</h1>
+    <div class="caller-status">
+      <span class="status-dot"></span>
+      <span id="call-status-text">Incoming Autonomous Call...</span>
+    </div>
+  </div>
+
+  <!-- Live Transcript & Dialogue Box -->
+  <div class="dialogue-box" id="dialogue-box">
+    <p class="bubble bot" id="bot-message">
+      "Hello Purushothaman. Antigravity task finished. Tap Answer to assign next work."
+    </p>
+    <p class="bubble user" id="user-transcript" style="display:none;"></p>
+    
+    <div class="wave-bars" id="wave-bars">
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+    </div>
+  </div>
+
+  <!-- Text Input Fallback -->
+  <div class="text-fallback" id="text-fallback">
+    <input type="text" id="manual-cmd" class="text-input" placeholder="Type next task (e.g. deploy project)...">
+    <button onclick="submitManualCommand()" class="text-send-btn">Send</button>
+  </div>
+
+  <!-- Action Controls -->
+  <div class="actions-section" id="incoming-actions">
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <button class="action-btn btn-decline" onclick="declineCall()" aria-label="Decline Call">✕</button>
+      <span class="action-label">Dismiss</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <button class="action-btn btn-answer" onclick="answerCall()" aria-label="Answer Call">📞</button>
+      <span class="action-label">Answer & Talk</span>
+    </div>
+  </div>
+
+  <div class="actions-section" id="active-actions" style="display:none;justify-content:center;gap:2rem">
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <button class="action-btn btn-decline" onclick="endCall()" aria-label="End Call">✕</button>
+      <span class="action-label">Hang Up</span>
+    </div>
+  </div>
+
+  <script>
+    var audioCtx = null;
+    var ringtoneTimer = null;
+    var recognition = null;
+    var isCallActive = false;
+    var speechSynth = window.speechSynthesis;
+
+    // 1. Synthesize Realistic Phone Ringtone using Web Audio API
+    function playRingtone() {
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        var osc1 = audioCtx.createOscillator();
+        var osc2 = audioCtx.createOscillator();
+        var gain = audioCtx.createGain();
+
+        osc1.type = 'sine';
+        osc2.type = 'sine';
+        osc1.frequency.value = 440; // Standard US/UK ringing tone
+        osc2.frequency.value = 480;
+
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        osc1.start();
+        osc2.start();
+
+        setTimeout(function() {
+          try {
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.1);
+            setTimeout(function() { osc1.stop(); osc2.stop(); }, 120);
+          } catch(e) {}
+        }, 1800);
+      } catch(e) {}
+    }
+
+    function startRingingLoop() {
+      playRingtone();
+      ringtoneTimer = setInterval(playRingtone, 4000);
+    }
+
+    function stopRingtone() {
+      if (ringtoneTimer) {
+        clearInterval(ringtoneTimer);
+        ringtoneTimer = null;
+      }
+    }
+
+    // Start ringing as soon as user opens or interacts
+    window.addEventListener('load', function() {
+      startRingingLoop();
+    });
+
+    // 2. Answer Call & Activate Talk-Back
+    function answerCall() {
+      stopRingtone();
+      isCallActive = true;
+
+      document.getElementById('incoming-actions').style.display = 'none';
+      document.getElementById('active-actions').style.display = 'flex';
+      document.getElementById('avatar-ring').style.display = 'none';
+      document.getElementById('call-status-text').textContent = 'Call Connected • 00:01';
+      document.getElementById('text-fallback').style.display = 'flex';
+
+      // Start Call Timer
+      var seconds = 1;
+      setInterval(function() {
+        if (!isCallActive) return;
+        seconds++;
+        var m = String(Math.floor(seconds / 60)).padStart(2, '0');
+        var s = String(seconds % 60).padStart(2, '0');
+        document.getElementById('call-status-text').textContent = 'Call Connected • ' + m + ':' + s;
+      }, 1000);
+
+      // AI Speaks First in Male Voice
+      speakBotMessage("Hello Purushothaman! Antigravity here. Your task has finished. What should I do next? I am listening.", function() {
+        // Start Speech Recognition
+        startListening();
+      });
+    }
+
+    function speakBotMessage(text, onComplete) {
+      document.getElementById('bot-message').textContent = '"' + text + '"';
+      document.getElementById('wave-bars').classList.add('active');
+
+      if (!speechSynth) {
+        if (onComplete) onComplete();
+        return;
+      }
+
+      speechSynth.cancel();
+      var utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 1.0;
+      utterance.pitch = 0.9; // Lower pitch for natural male voice
+
+      // Look for male voice
+      var voices = speechSynth.getVoices();
+      for (var i = 0; i < voices.length; i++) {
+        var name = voices[i].name.toLowerCase();
+        if (name.includes('male') || name.includes('david') || name.includes('george') || name.includes('prabhat') || name.includes('mark') || name.includes('daniel')) {
+          utterance.voice = voices[i];
+          break;
+        }
+      }
+
+      utterance.onend = function() {
+        document.getElementById('wave-bars').classList.remove('active');
+        if (onComplete) onComplete();
+      };
+      speechSynth.speak(utterance);
+    }
+
+    // 3. Speech Recognition (Talk-Back)
+    function startListening() {
+      var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        document.getElementById('bot-message').textContent = '"Speech recognition not supported in this browser. Please type your command below:"';
+        return;
+      }
+
+      recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = true;
+      recognition.lang = 'en-US';
+
+      var userBubble = document.getElementById('user-transcript');
+      userBubble.style.display = 'block';
+      userBubble.textContent = 'Listening to your voice...';
+      document.getElementById('wave-bars').classList.add('active');
+
+      recognition.onresult = function(event) {
+        var transcript = '';
+        for (var i = event.resultIndex; i < event.results.length; ++i) {
+          transcript += event.results[i][0].transcript;
+        }
+        userBubble.textContent = '🗣️ "' + transcript + '"';
+
+        if (event.results[0].isFinal) {
+          handleUserCommand(transcript);
+        }
+      };
+
+      recognition.onerror = function(err) {
+        console.error("Speech error:", err);
+      };
+
+      recognition.onend = function() {
+        document.getElementById('wave-bars').classList.remove('active');
+      };
+
+      recognition.start();
+    }
+
+    // 4. Command Dispatcher to Antigravity
+    function handleUserCommand(cmd) {
+      if (!cmd || cmd.trim().length === 0) return;
+
+      speakBotMessage("Understood Purushothaman! Executing: " + cmd + ". Starting work immediately. Goodbye!", function() {
+        setTimeout(endCall, 2000);
+      });
+
+      // Dispatch to ntfy cloud queue for Antigravity Linux daemon
+      fetch('https://ntfy.sh/antigravity-purushothaman-commands', {
+        method: 'POST',
+        headers: { 'Title': 'Voice Command Received', 'Priority': 'high' },
+        body: cmd
+      }).then(function() {
+        console.log("Command queued to Antigravity!");
+      }).catch(function(e) {
+        console.error("Queue error:", e);
+      });
+    }
+
+    function submitManualCommand() {
+      var val = document.getElementById('manual-cmd').value;
+      if (val && val.trim()) {
+        handleUserCommand(val.trim());
+      }
+    }
+
+    function declineCall() {
+      stopRingtone();
+      if (speechSynth) speechSynth.cancel();
+      document.body.innerHTML = `
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center">
+          <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:0.5rem">Call Dismissed</h2>
+          <p style="color:#94a3b8">Antigravity is waiting in your terminal.</p>
+        </div>
+      `;
+    }
+
+    function endCall() {
+      isCallActive = false;
+      stopRingtone();
+      if (speechSynth) speechSynth.cancel();
+      if (recognition) recognition.stop();
+      document.body.innerHTML = `
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center">
+          <div style="font-size:3rem;margin-bottom:1rem">✅</div>
+          <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:0.5rem">Command Dispatched!</h2>
+          <p style="color:#10b981;font-weight:600;margin-bottom:1.5rem">Antigravity is now executing your instruction.</p>
+          <a href="/" style="color:#818cf8;text-decoration:none;font-size:0.9rem">Return to Portfolio →</a>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
