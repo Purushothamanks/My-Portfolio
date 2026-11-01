@@ -69,6 +69,14 @@
       gap: 8px;
       z-index: 102;
     }
+    .nav-links-wrap {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links-wrap .btn-contact {
+      display: none;
+    }
     .nav-links { display: flex; gap: clamp(16px, 2.5vw, 28px); list-style: none; align-items: center; }
     .nav-links a {
       color: var(--text-muted);
@@ -294,42 +302,63 @@
 
     /* Responsive Media Queries */
     @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
       .nav-toggle {
         display: flex;
       }
       .nav-links-wrap {
         display: none;
-        position: absolute;
-        top: calc(100% + 14px);
-        left: 0;
-        right: 0;
-        background: #111827;
+        position: fixed;
+        top: 72px;
+        left: 16px;
+        right: 16px;
+        max-width: calc(100vw - 32px);
+        max-height: calc(100vh - 90px);
+        overflow-y: auto;
+        background: rgba(17, 24, 39, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         border: 1px solid var(--border-color);
         border-radius: var(--radius-lg);
-        padding: 24px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        padding: 20px 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(6, 182, 212, 0.15);
         flex-direction: column;
-        gap: 16px;
+        gap: 12px;
         z-index: 101;
       }
       .nav-links-wrap.open {
         display: flex;
+        animation: navSlideDown 0.25s ease-out;
+      }
+      @keyframes navSlideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
       }
       .nav-links {
         flex-direction: column;
         width: 100%;
-        gap: 12px;
+        gap: 8px;
         align-items: stretch;
       }
       .nav-links a {
-        padding: 10px 14px;
+        padding: 12px 16px;
         border-radius: var(--radius-sm);
         background: rgba(255, 255, 255, 0.03);
+        font-size: 15px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
       }
       .nav-links-wrap .btn-contact {
+        display: inline-flex;
         width: 100%;
         text-align: center;
-        margin-top: 8px;
+        justify-content: center;
+        margin-top: 6px;
+        min-height: 48px;
+        font-size: 15px;
       }
       .nav-actions .btn-contact {
         display: none;
@@ -338,21 +367,89 @@
         display: block;
       }
       .hero {
-        padding: 40px 0;
+        padding: 40px 0 30px;
+        gap: 24px;
+      }
+      .hero-content {
+        width: 100%;
+        min-width: 0;
+      }
+      .hero-title {
+        font-size: clamp(28px, 7vw, 42px);
+        line-height: 1.2;
+      }
+      .hero-subtitle {
+        font-size: clamp(14px, 3.5vw, 16px);
+        margin-bottom: 24px;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .skills-container {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .card-body {
+        padding: 20px 16px;
+      }
+      .contact-card {
+        padding: 28px 16px !important;
+      }
+      .contact-card a.btn-contact {
+        width: 100% !important;
+        font-size: 14px !important;
+        padding: 12px 16px !important;
+        word-break: break-all;
       }
     }
 
     @media (max-width: 480px) {
+      .logo {
+        font-size: 19px;
+      }
+      .badge {
+        font-size: 12px;
+        padding: 5px 10px;
+      }
       .hero-cta {
         flex-direction: column;
         width: 100%;
+        gap: 10px;
       }
       .hero-cta .btn-contact,
       .hero-cta .btn-secondary {
         width: 100%;
+        justify-content: center;
+        min-height: 48px;
       }
       .contact-card {
-        padding: 24px 16px !important;
+        padding: 20px 12px !important;
+      }
+      .card-title {
+        font-size: 18px;
+      }
+      .card-desc {
+        font-size: 13.5px;
+      }
+      .tech-pill {
+        font-size: 11px;
+        padding: 3px 8px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .container {
+        padding: 0 10px;
+      }
+      .logo {
+        font-size: 17px;
+      }
+      .hero-title {
+        font-size: 24px;
+      }
+      .hero-subtitle {
+        font-size: 13px;
       }
     }
 
